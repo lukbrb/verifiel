@@ -145,8 +145,7 @@ dmypy.json
 cython_debug/
 
 # Data
-donnees_liste_emails.csv
-lucas_donnees_liste_emails.csv
+*.csv
 # PyCharm
 #  JetBrains specific template is maintainted in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
