@@ -15,7 +15,7 @@ def write_data(liste_desabo):
 
     # data rows of csv file
     # liste_infos = [[info.auteur, info.adresse, info.lien, info.type_lien] for info in liste_desabo]
-    with open('donnees_liste_emails.csv', 'w') as f:
+    with open('../donnees_liste_emails.csv', 'w') as f:
         # using csv.writer method from CSV package
         write = csv.writer(f)
 

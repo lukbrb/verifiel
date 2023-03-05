@@ -85,4 +85,4 @@ def analyse_lien(lien):
     return lien_valide, type_lien
 
 
-get_registered_list(filename="lucas_donnees_liste_emails.csv")
+get_registered_list(filename="../lucas_donnees_liste_emails.csv")
