@@ -12,7 +12,7 @@ setup(
     url='',
     license='Apache 2.0',
     author='Lucas Barbier',
-    author_email='lucasbarbr@outlook.com',
+    author_email='lucas.barbier@protonmail.com',
     description='Vérifiel est un logiciel de tri de courriels. Il permet en outre d\'automatiser le désabonnement des '
                 'listes de distribution.'
 )
