@@ -31,26 +31,26 @@ en place des interfaces graphiques.
 
 
 **Problèmes :**  
-[] Problèmes d'encodage sur quelques adresses et liens  
-[] Mettre à jour la liste une fois qu'on est désabonnés  
-[] Plante encore pour des raisons inconnues sur certains liens: 
+- [ ] Problèmes d'encodage sur quelques adresses et liens  
+- [ ] Mettre à jour la liste une fois qu'on est désabonnés  
+- [ ] Plante encore pour des raisons inconnues sur certains liens: 
 `SMTPRecipientsRefused(senderrs) smtplib.SMTPRecipientsRefused`
 
 **À implémenter sous peu :**  
-[x] L'envoi des courriels pour le désabonnement  
-[] L'ajout des serveurs SMTP  
-[] La suppression des messages (à voir)  
-[] L'analyse des domaines, donc des sites possédants notre adresse  
-[] Interface graphique permettant de sélectionner directement les adresses que l'on souhaite garder ou non  
-[] Un installateur pour plateforme UNIX (Mac OS et Linux)
+- [x] L'envoi des courriels pour le désabonnement  
+- [ ] L'ajout des serveurs SMTP  
+- [ ] La suppression des messages (à voir)  
+- [ ] L'analyse des domaines, donc des sites possédants notre adresse  
+- [ ] Interface graphique permettant de sélectionner directement les adresses que l'on souhaite garder ou non  
+- [ ] Un installateur pour plateforme UNIX (Mac OS et Linux)
 
 **À améliorer:**  
-[] L'affichage des informations sur le terminal (voir CLI Python)  
-[] Le temps d'éxecution du programme  
-[] La flexibilité du programme pour ne pas avoir à tout réprendre de zéro si erreur il y a  
-[] La documentation, la licence et le fichier README  
-[] Les fonctions de désabonnement. Créer une classe ou quelque chose de similaire pour ne pas avoir à passer les identifiants
+- [ ] L'affichage des informations sur le terminal (voir CLI Python)  
+- [ ] Le temps d'éxecution du programme  
+- [ ] La flexibilité du programme pour ne pas avoir à tout réprendre de zéro si erreur il y a  
+- [ ] La documentation, la licence et le fichier README  
+- [ ] Les fonctions de désabonnement. Créer une classe ou quelque chose de similaire pour ne pas avoir à passer les identifiants
 à toutes les fonctions.  
-[] Aussi, effacer ou déplacer les adresses dont on s'est déjà désabonnés.  
-[] Tenter de se connecter directement au serveur SMTP. Au cas où les identifiants sont mauvais, évite de faire attendre jusqu'au 
+- [ ] Aussi, effacer ou déplacer les adresses dont on s'est déjà désabonnés.  
+- [ ] Tenter de se connecter directement au serveur SMTP. Au cas où les identifiants sont mauvais, évite de faire attendre jusqu'au 
 premier envoi d'email pour faire planter le programme.
