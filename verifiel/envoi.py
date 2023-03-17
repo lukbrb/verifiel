@@ -33,5 +33,4 @@ def envoie_message(expediteur: str, destinataire: str, mot_de_passe: str, messag
         server.starttls()
         server.login(expediteur, mot_de_passe)
         server.sendmail(expediteur, destinataire, message.as_string())
-        print("[+] Message envoyé avec succès !")
-
+        print(f"[+] Message envoyé avec succès à {destinataire}!")
