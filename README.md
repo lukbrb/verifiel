@@ -1,6 +1,6 @@
 # Vérifiel
 
-Vérifiel a pour but d'automatiser la désinsctiption aux chaînes d'emails, et la suppression de ces derniers si souhaité.
+Vérifiel a pour but d'automatiser la désinscription aux chaînes de courriels et, la suppression de ces derniers si souhaitée.
 Pour ce faire, le logiciel procède de deux manières :
 - Le logiciel vérifie si l'en-tête contient la clé "List-Unsubscribe", puis envoie un courriel à l'adresse liée pour 
 se désabonner
@@ -12,20 +12,22 @@ le lien dans son navigateur. Une confirmation humaine est généralemet nécessa
 
 Dans un premier temps les identifiants de l'utilisateur seront demandés. Rien n'est stocké, il faudra donc réentrer ses 
 identifiants à chaque utilisation. Si la connexion réussie, le logiciel va commencer à scanner la boîte principale 
-de l'utilisateur. Cela peut prendre un certain temps pour une première utilisation, étant de donné le nombre de courriels
+de l'utilisateur. Cela peut prendre un certain temps pour une première utilisation, étant donné le nombre de courriels
 généralement conséquent. 
-Lors du scan, le logiciel écrit les adresses courriel correspondant aux chaînes d'emails dans un fichier JSON.
+Lors du scan, le logiciel écrit les adresses courriel correspondant aux chaînes d'emails dans un fichier JSON ou CSV.
 
 Une fois la phase de scan finie, le programme se met en pause et demande à l'utilisateur s'il souhaite maintenant 
 procéder au désabonnement des chaînes trouvées. 
 Pour chaque adresse, le programme demandera confirmation du souhait de se désabonner. Toutes les chaînes ne sont pas 
-néfastes ! 
+néfastes ! Plus tard lorsque l'interface graphique sera disponible, l'utilisateur pourra cocher les chaînes qu'il souhaite
+supprimer.
 
 
 ### Prochainement
 
 L'idée est de tirer avantage du scan de la boîte mail pour trouver les sites qui possèdent donc votre adresse, et dont 
-vous souhaiteriez éventuellement supprimer votre compte.
+vous souhaiteriez éventuellement supprimer votre compte. De plus, il serait bon de créer une API pour faciliter la mise 
+en place des interfaces graphiques.
 
 
 **Problèmes :**
