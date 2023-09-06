@@ -4,7 +4,7 @@ import sys
 
 from tqdm import tqdm
 
-from recherche_listes import find_email_list
+from verifiel.recherche_listes import find_email_list
 
 
 def write_data(liste_desabo):
@@ -41,12 +41,12 @@ def connect_user(courriel, mdp, serveur):
         connexion = imaplib.IMAP4_SSL(imap_server)
         connexion.login(courriel, mdp)
         print("[*] Connexion réussie !")
-        return connexion
+        return connexion, True
 
     except imaplib.IMAP4.error as e:
         print("[!] La connexion a échoué.")
         print(e)
-        sys.exit(1)
+        return e, False
 
 
 def get_emails_data(connexion):
