@@ -30,7 +30,7 @@ def main():
         serveur = serveurs_IMAP[choix_boite]
         print(f"[*] Vous avez choisi la boîte {choix_boite}.")
         courriel, mdp = get_credentials()
-        connexion = connect_user(courriel, mdp, serveur)
+        connexion, _ = connect_user(courriel, mdp, serveur)
         emails_data = get_emails_data(connexion=connexion)
         liste_desabonnement = traverse_email_data(emails_data, connexion=connexion)
         write_data(liste_desabonnement)
