@@ -85,6 +85,6 @@ class VerifielApp:
 if __name__ == "__main__":
     fenetre = tk.Tk()
     app = VerifielApp(fenetre)
-    fenetre.geometry("600x400")
+    fenetre.geometry("720x300")
     fenetre.mainloop()
     disconnect_user(app.connexion)
