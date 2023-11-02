@@ -25,7 +25,6 @@ def main():
     # Si fichier n'existe pas: action = 1
     # Sinon action = choix_action()
     if action == 1:
-        display_servers(serveurs_IMAP)
         choix_boite = display_servers(serveurs_IMAP)
         serveur = serveurs_IMAP[choix_boite]
         print(f"[*] Vous avez choisi la boîte {choix_boite}.")
