@@ -14,7 +14,6 @@ headers = {
 
 def lance_desabonnement(expediteur, mdp, filename: str = "donnees_liste_emails.csv"):
     with open(filename, newline='', encoding='utf-8') as csvfile:
-        # Créer un objet reader CSV
         csvreader = csv.reader(csvfile, delimiter=',')
         entetes = next(csvreader)
         gere_desabonnement(csvreader, expediteur, mdp)
