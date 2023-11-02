@@ -4,7 +4,7 @@ import webbrowser
 
 import requests
 
-from envoi import prepare_message, envoie_message
+from envoi import Message
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -57,8 +57,9 @@ def envoi_desabonnement(lien, type_lien, row, expediteur, mdp):
     elif type_lien == 'mailto':
         destinataire = row[1] if row != "" else row[0]
         print("Envoi courriel à", destinataire)
-        contenu_message = prepare_message(expediteur, destinataire=lien, texte="", sujet="list-unsubscribe")
-        envoie_message(expediteur, destinataire=lien, mot_de_passe=mdp, message=contenu_message)
+        message = Message(expediteur, destinataire=lien, texte="", sujet="list-unsubscribe")
+        # contenu_message = prepare_message(expediteur, destinataire=lien, texte="", sujet="list-unsubscribe")
+        message.envoie_message(mot_de_passe=mdp)
     else:
         print("Problème avec le lien :", lien)
 
