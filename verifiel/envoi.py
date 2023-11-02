@@ -28,7 +28,6 @@ def envoie_message(expediteur: str, destinataire: str, mot_de_passe: str, messag
         Envoie un courriel à l'adresse spécifiée par l'argument 'destinataire'
     """
 
-    # Send the message via SMTP server.
     with smtplib.SMTP(SERVEUR, PORT) as server:
         server.starttls()
         server.login(expediteur, mot_de_passe)
