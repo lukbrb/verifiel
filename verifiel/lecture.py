@@ -4,7 +4,7 @@ import sys
 
 from tqdm import tqdm
 
-from verifiel.recherche_listes import find_email_list
+from recherche_listes import find_email_list
 
 
 def write_data(liste_desabo):
