@@ -49,6 +49,7 @@ def connect_user(courriel, mdp, serveur):
         return e, False
 
 
+
 def get_emails_data(connexion):
     """ Connects to the email server and
         returns the data of all emails in the Inbox.
@@ -64,6 +65,10 @@ def get_emails_data(connexion):
         print("[!] La connexion a échoué.")
         print(e)
         sys.exit(1)
+    finally:
+        connexion.close()
+        connexion.logout()
+
 
 
 def traverse_email_data(data, connexion):
