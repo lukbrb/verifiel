@@ -14,7 +14,6 @@ serveurs_SMTP = {'Outlook': ('smtp-mail.outlook.com', 587)}
 
 
 # TODO: Améliorer affichage, notamment mettre de la couleur
-# TODO: Implémenter le désabonnement
 # TODO: Implémenter la suppression des emails si voulu
 
 def read_creds(filename):
