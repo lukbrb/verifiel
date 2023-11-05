@@ -4,7 +4,7 @@ import getpass
 
 from tqdm import tqdm
 
-from recherche_listes import find_email_list
+from verifiel.recherche_listes import find_email_list
 
 class User:
     def __init__(self, courriel: str, mdp: str, serveur: str) -> None:
