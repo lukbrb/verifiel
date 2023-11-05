@@ -14,6 +14,7 @@ class User:
         self.connexion = None
         self.email_data = None
         self.liste_desabo = None
+        self.connected = False
 
     def connect(self):
         imap_server = self.serveur
@@ -23,16 +24,17 @@ class User:
             connexion.login(self.courriel, self.mdp)
             print("[*] Connexion réussie !")
             self.connexion = connexion
+            self.connected = True
 
         except imaplib.IMAP4.error as e:
             print("[!] La connexion a échoué.")
             print(e)
-            sys.exit(1)
+            # sys.exit(1)
 
     def disconnect(self):
-        if not self.connexion:
+        if not self.connexion or not self.connected:
             print("[x] Connexion inexistente.")
-            sys.exit(1)
+            # sys.exit(1)
     
         print("[*] Fermeture de la connexion...")
         self.connexion.close()
@@ -48,7 +50,7 @@ class User:
         """
         if not self.connexion:
             print("[x] Connexion inexistente. Veuillez réessayer.")
-            sys.exit(1)
+            # sys.exit(1)
         try:
             self.connexion.select("Inbox")
             print("[*] Selection de la boîte principale.")
@@ -62,11 +64,11 @@ class User:
             print(e)
             self.connexion.close()
             self.connexion.logout()
-            sys.exit(1)
+            self.connected = False
+            # sys.exit(1)
+
             
             
-
-
     def get_liste_desabo(self):
         """ Go through all the emails and calls function
             to check if the current email is from an email list.
@@ -95,7 +97,8 @@ class User:
             write_data(liste_desabo)
             self.connexion.close()
             self.connexion.logout()
-            sys.exit(1)
+            self.connected = False
+            # sys.exit(1)
 
 
 
@@ -107,7 +110,7 @@ def get_credentials():
 
     except Exception as error:
         print('[!] ERREUR', error)
-        sys.exit(1)
+        # sys.exit(1)
 
 def write_data(liste_desabo):
     import csv
