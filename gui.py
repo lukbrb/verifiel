@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import time
 
-from verifiel.lecture import User
+from verifiel.lecture import User, write_data
 
 serveurs_IMAP = {'Gmail': 'imap.gmail.com', 'Outlook': 'imap-mail.outlook.com',
                  'Hotmail': 'imap-mail.outlook.com', 'Yahoo': 'imap.mail.yahoo.com',
@@ -53,6 +53,7 @@ class VerifielApp:
 
         # Centrer la fenêtre
         self.centrer_fenetre()
+        self.user = None
 
     def centrer_fenetre(self):
         self.fenetre.update_idletasks()
@@ -68,21 +69,22 @@ class VerifielApp:
         mot_de_passe = self.mot_de_passe_entry.get()
         serveur = serveurs_IMAP[self.serveur_entry.get()]
         
-        user = User(courriel, mot_de_passe, serveur)
-        user.connect()
+        self.user = User(courriel, mot_de_passe, serveur)
+        self.user.connect()
         connexion_msg = tk.StringVar()
         connexion_msg.set("Connexion...")
         info_label = tk.Label(self.frame_principal, textvariable=connexion_msg, font=self.police_info, fg=self.couleur_texte, bg="grey18")
         info_label.pack()
 
-        if user.connected:
+        if self.user.connected:
             connexion_msg.set("Connexion réussie")
-            connexion_msg.set(None)
+            connexion_msg.set("")
             self.clear_connexion_screen()
+            self.create_choice_menu(self.user)
             
         else:
             connexion_msg.set("La connexion a échoué.")
-        user.disconnect()
+        
 
     def clear_connexion_screen(self):
         self.info_label.destroy()
@@ -91,8 +93,34 @@ class VerifielApp:
         self.serveur_entry.pack_forget()
         self.se_connecter_button.pack_forget()
 
-    def create_choice_menu(self):
-        pass
+    def create_choice_menu(self, user):
+        # Plutot mettre deux radios boutons, et un bouton "Lancer", pour être que les deux boutons sont pas cliqués en même temps
+        self.lancer_recup_courriels = ttk.Button(self.frame_principal, text="Scanner ma boîte", style="TButton", command=self.effectuer_scan)
+        self.lancer_recup_courriels.pack()
+
+        self.se_desabonner = ttk.Button(self.frame_principal, text="Se désabonner", style="TButton") #, command=user.a())
+        self.se_desabonner.pack()
+    
+    def effectuer_scan(self):
+        self.se_desabonner.pack_forget()
+        self.lancer_recup_courriels.pack_forget()
+        analyse_msg = tk.StringVar()
+
+        info_label = tk.Label(self.frame_principal, text="Analyse de la boîte.\nVeuillez patienter...\nInformations disponibles sur le terminal.", textvariable=analyse_msg, font=self.police_info, fg=self.couleur_texte, bg="grey18")
+        info_label.pack()
+        time.sleep(2)
+        self.user.get_emails_data()
+        self.user.get_liste_desabo()
+        analyse_msg.set("Données récupérées ! Sauvegarde...")
+        time.sleep(2)
+        filename = 'test.csv'
+        write_data(self.user.liste_desabo, filename=filename)
+        analyse_msg.set(f"Sauvegarde terminée ! Les résultats sont disponibles dans le fichier: '{filename}")
+        print("[*] Processus terminé.\n")
+        self.user.disconnect()
+        self.quitter = ttk.Button(self.frame_principal, text="Quitter", style="TButton", command=self.fenetre.destroy)
+        self.quitter.pack()
+
 
 
 if __name__ == "__main__":
