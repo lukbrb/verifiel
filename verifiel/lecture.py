@@ -112,7 +112,7 @@ def get_credentials():
         print('[!] ERREUR', error)
         # sys.exit(1)
 
-def write_data(liste_desabo):
+def write_data(liste_desabo, filename="donnees_liste_emails.csv"):
     import csv
     print("[*] Écriture des résultats...")
     # field names
@@ -120,7 +120,7 @@ def write_data(liste_desabo):
 
     # data rows of csv file
     # liste_infos = [[info.auteur, info.adresse, info.lien, info.type_lien] for info in liste_desabo]
-    with open('../donnees_liste_emails.csv', 'w') as f:
+    with open(f'{filename}', 'w') as f:
         # using csv.writer method from CSV package
         write = csv.writer(f)
 
