@@ -2,8 +2,13 @@ import tkinter as tk
 from tkinter import ttk
 import time
 
-from verifiel.lecture import connect_user, disconnect_user
+from verifiel.lecture import User
 
+serveurs_IMAP = {'Gmail': 'imap.gmail.com', 'Outlook': 'imap-mail.outlook.com',
+                 'Hotmail': 'imap-mail.outlook.com', 'Yahoo': 'imap.mail.yahoo.com',
+                 'ATT': 'imap.mail.att.net', 'Comcast': 'imap.comcast.net',
+                 'Verizon': 'incoming.verizon.net', 'AOL': 'imap.aol.com',
+                 'Zoho': 'imap.zoho.com'}
 class VerifielApp:
     def __init__(self, fenetre):
         self.fenetre = fenetre
@@ -39,13 +44,12 @@ class VerifielApp:
         self.mot_de_passe_entry = ttk.Entry(self.frame_principal, show="*", style="TEntry")
         self.mot_de_passe_entry.pack()
 
+        self.serveur_entry = ttk.Combobox(self.frame_principal, values=list(serveurs_IMAP.keys()), state='readonly')
+        self.serveur_entry.current(1)
+        self.serveur_entry.pack()
         # Ajouter le bouton "Se connecter"
         self.se_connecter_button = ttk.Button(self.frame_principal, text="Se connecter", style="TButton", command=self.se_connecter)
         self.se_connecter_button.pack()
-
-        self.barre_chargement = ttk.Progressbar(self.frame_principal, mode="indeterminate", maximum=100)
-        self.barre_chargement.pack()
-        self.barre_chargement.stop()
 
         # Centrer la fenêtre
         self.centrer_fenetre()
@@ -62,29 +66,38 @@ class VerifielApp:
         # Récupérer les valeurs entrées par l'utilisateur
         courriel = self.courriel_entry.get()
         mot_de_passe = self.mot_de_passe_entry.get()
-        info_label = tk.Label(self.frame_principal, text="Connexion...", font=self.police_info, fg=self.couleur_texte, bg="grey18")
+        serveur = serveurs_IMAP[self.serveur_entry.get()]
+        
+        user = User(courriel, mot_de_passe, serveur)
+        user.connect()
+        connexion_msg = tk.StringVar()
+        connexion_msg.set("Connexion...")
+        info_label = tk.Label(self.frame_principal, textvariable=connexion_msg, font=self.police_info, fg=self.couleur_texte, bg="grey18")
         info_label.pack()
-        self.connexion, status = connect_user(courriel, mot_de_passe, serveur='imap-mail.outlook.com')
-        if status is True:
-            info_label = tk.Label(self.frame_principal, text="Connexion réussie", font=self.police_info, fg=self.couleur_texte, bg="grey18")
-            info_label.pack()
-        else:
-            info_label = tk.Label(self.frame_principal, text="La connexion a échoué", font=self.police_info, fg=self.couleur_texte, bg="grey18")
-            info_label.pack()
-        # Ajoutez ici la logique de connexion à votre boîte mail et de désabonnement
 
-    def lancer_chargement(self):
-        # Simuler un traitement long (remplacez cela par votre logique de connexion réelle)
-        self.se_connecter_button.configure(state="disabled")  # Désactiver le bouton
-        self.barre_chargement.start(10)  # Démarrer la barre de chargement
-        self.fenetre.update_idletasks()
-        time.sleep(5)  # Simuler un traitement long (5 secondes)
-        self.barre_chargement.stop()  # Arrêter la barre de chargement
-        self.se_connecter_button.configure(state="normal")  # Réactiver le bouton
+        if user.connected:
+            connexion_msg.set("Connexion réussie")
+            connexion_msg.set(None)
+            self.clear_connexion_screen()
+            
+        else:
+            connexion_msg.set("La connexion a échoué.")
+        user.disconnect()
+
+    def clear_connexion_screen(self):
+        self.info_label.destroy()
+        self.courriel_entry.pack_forget()
+        self.mot_de_passe_entry.pack_forget()
+        self.serveur_entry.pack_forget()
+        self.se_connecter_button.pack_forget()
+
+    def create_choice_menu(self):
+        pass
+
 
 if __name__ == "__main__":
     fenetre = tk.Tk()
     app = VerifielApp(fenetre)
     fenetre.geometry("720x300")
     fenetre.mainloop()
-    disconnect_user(app.connexion)
+    #disconnect_user(app.connexion)
